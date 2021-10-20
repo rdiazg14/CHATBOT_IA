@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="../Static/style.css" type="text/css" />
+	<link rel="stylesheet" href="../Static/css.css" type="text/css" />	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title>CHATBOT UNCP</title>
+	<style>
+img.animated-gif{
+	width: 240px;
+	height: auto;
+	align: center;
+}
+.roundContainer {
+	box-shadow:0px 0px 70px #222;
+	-moz-box-shadow:0px 0px 70px #222;
+	-webkit-box-shadow:0px 0px 70px #222;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	background-color:#fff;
+	margin:0px auto;
+	border-left:2px solid #fff;
+	border-right:2px solid #fff;
+}
+</style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-10 mr-auto ml-auto">
+			<h2 style="text-align:center; font-family: monospace;font-weight: bold;line-height: 50%;">API CHATBOT ECOMMERCE EPP</h2>	
+			<h3 style="text-align:center; font-family: monospace;font-weight: bold;line-height: 50%;">Equipos de Protecci&oacute;n Personal</h3>	
+	        <div id="cargar" style="text-align:center">
+				<img class="animated-gif roundContainer"  src="BOT_recorte1.gif" alt="robot" />
+			</div>
+			<form id="form" method="post">
+				<div id="chatbox">
+					<div class="col-md-8 ml-auto mr-auto">
+						<p class="botText"><span>Hola Yo soy un bot, preg&uacute;ntame.</span></p>
+					</div>
+				</div>
+				<div id="userInput" class="row">
+					<div class="col-md-10">
+						<input id="text" type="text" placeholder="Pregunta" class="form-control">
+						<button type="submit" class="btn btn-warning">Enviar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<script>
+	var form = document.getElementById('form')	
+	form.addEventListener('submit',function(e){	
+	e.preventDefault()	
+	var rawText = $("#text").val();
+    var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+    $("#text").val("");
+    $("#chatbox").append(userHtml);
+			
+	var name = rawText	
+		fetch("https://a94f-54-86-68-227.ngrok.io/post",{
+			method: 'POST',
+			body:JSON.stringify({
+				text:name,
+			})
+		})
+		.then(function(response){
+			return response.json()
+		})
+		.then(function(data){
+			console.log(data)
+		var botHtml = '<p class="botText"><span>' + `${data.text}` + "</span></p>";
+        $("#chatbox").append($.parseHTML(botHtml));
+		
+
+		})
+	})	
+	</script>
+	
+	
+
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<title>Example</title>
+	<style>
+img.animated-gif{
+  width: 240px;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+	<img class="animated-gif"  src="BOT.gif" alt="robot" />
+	<p>
+	<h2>Hola soy un CHATBOT, preguntame</h2>
+	<form id="form" method="post">
+		HUMANO: <input type="text" id="text" placeholder="pregunta"/>
+		<input type="submit" value="Enviar"/>
+	</form>
+		<div id="results">	
+	</div>
+	<script>
+	var form = document.getElementById('form')	
+	form.addEventListener('submit',function(e){	
+	e.preventDefault()	
+	var name = document.getElementById('text').value	
+		fetch("https://2461-54-198-10-94.ngrok.io/post",{
+			method: 'POST',
+			body:JSON.stringify({
+				text:name,
+			})
+		})
+		.then(function(response){
+			return response.json()
+		})
+		.then(function(data){
+			console.log(data)
+		var results = document.getElementById('results')			
+			results.innerHTML=`<p>BOT: ${data.text}</p>			
+			`	
+		})
+	})	
+	</script>
+</body>
+</html>

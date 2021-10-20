@@ -1,0 +1,2 @@
+model_checkpoint_path: "C:\\WORK\\rolando\\apitest\\modelo.tflearn"
+all_model_checkpoint_paths: "C:\\WORK\\rolando\\apitest\\modelo.tflearn"
